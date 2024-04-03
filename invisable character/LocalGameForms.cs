@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace invisable_character
+{
+    public partial class LocalGameForms : Form
+    {
+        public LocalGameForms()
+        {
+            InitializeComponent();
+        }
+    }
+}
