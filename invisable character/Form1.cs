@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,7 +19,9 @@ namespace invisable_character
         public string tamagotchi_surprised = Path.Combine(Application.StartupPath, "resources/character/2.png");
         public string tamagotchi_angry = Path.Combine(Application.StartupPath, "resources/character/3.png");
         public string tamagotchi_happy = Path.Combine(Application.StartupPath, "resources/character/4.png");
-        public string tamagotchi_cool= Path.Combine(Application.StartupPath, "resources/character/5.png");
+        public string tamagotchi_cool = Path.Combine(Application.StartupPath, "resources/character/5.png");
+        public string tamagotchi_cute = Path.Combine(Application.StartupPath, "resources/character/6.png");
+        public string tamagotchi_sleeping = Path.Combine(Application.StartupPath, "resources/character/7.png");
 
         public string tamagotchi_name = "sam";
         public string user_name = "shpat";
@@ -26,8 +29,8 @@ namespace invisable_character
         //tamagotchi attributes
         public int tickCount = 0;
         public int click_count = 0;
-        public int sleep_level = 0; 
-        public int hunger = 0;  
+        public int sleep_level = 0;
+        public int hunger = 0;
         public Form1()
         {
             InitializeComponent();
@@ -36,13 +39,13 @@ namespace invisable_character
             panel1.Visible = false;
             pictureBox1.Load(tamagotchi_normal);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            label1.Text = $"Hello {user_name} My Name is: {tamagotchi_name}";
+            label1.Text = $"Hello {user_name} My Name is {tamagotchi_name}";
 
             //timer
             timer1.Interval = 1000;
             timer1.Start();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             click_count++;
             if (hunger > 100000)
@@ -52,9 +55,9 @@ namespace invisable_character
                 label1.Text = "yummy food :)";
                 pictureBox1.Load(tamagotchi_happy);
                 panel2.Visible = true;
-
-                wait(10000);
-
+                timer1.Enabled = false;
+                await Task.Delay(10000);
+                timer1.Enabled = true;
                 pictureBox1.Load(tamagotchi_normal);
             }
             else
@@ -62,21 +65,39 @@ namespace invisable_character
                 pictureBox1.Load(tamagotchi_angry);
                 label1.Text = "im not hungry -_-";
                 panel2.Visible = true;
-
-                wait(10000);
+                timer1.Enabled = false;
+                await Task.Delay(5000);
+                timer1.Enabled = true;
+                pictureBox1.Load(tamagotchi_normal);
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             click_count++;
             panel1.Visible = false;
+            label1.Text = "night night";
+            pictureBox1.Load(tamagotchi_sleeping);
+            panel2.Visible = true;
+            timer1.Enabled = false;
+            await Task.Delay(1000);
+            label1.Text = "ZzzZZZ";
+            await Task.Delay(100000);
+            timer1.Enabled = true;
+            pictureBox1.Load(tamagotchi_normal);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
             click_count++;
             panel1.Visible = false;
+            label1.Text = "awww thanks ^^";
+            pictureBox1.Load(tamagotchi_cute);
+            panel2.Visible = true;
+            timer1.Enabled = false;
+            await Task.Delay(3000);
+            timer1.Enabled = true;
+            pictureBox1.Load(tamagotchi_normal);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -112,7 +133,7 @@ namespace invisable_character
             else { panel1.Visible = false; }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
             tickCount++;
             hunger++;
@@ -123,21 +144,15 @@ namespace invisable_character
                 label1.Text = "";
                 panel2.Visible = false;
             }
-        }
-        public void wait(int milliseconds)
-        {
-            var timer1 = new System.Windows.Forms.Timer();
-            if (milliseconds == 0 || milliseconds < 0) return;
-
-            timer1.Interval = milliseconds;
-            timer1.Enabled = true;
-            timer1.Start();
-
-            timer1.Tick += (s, e) =>
+            if (hunger > 50000)
             {
+                pictureBox1.Load(tamagotchi_surprised);
+                label1.Text = "im kinda hungry...";
+                panel2.Visible = true;
                 timer1.Enabled = false;
-                timer1.Stop();
-            };
+                await Task.Delay(5000);
+                timer1.Enabled = true;
+            }
         }
     }
 }
