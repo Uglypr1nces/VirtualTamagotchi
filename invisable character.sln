@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "invisable character", "invisable character\invisable character.csproj", "{DAF20E3A-F713-407A-BC1F-21F0DE090F7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAF20E3A-F713-407A-BC1F-21F0DE090F7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAF20E3A-F713-407A-BC1F-21F0DE090F7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAF20E3A-F713-407A-BC1F-21F0DE090F7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAF20E3A-F713-407A-BC1F-21F0DE090F7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {122CD673-3B15-441B-9546-0A6F0C81D4E1}
+	EndGlobalSection
+EndGlobal
