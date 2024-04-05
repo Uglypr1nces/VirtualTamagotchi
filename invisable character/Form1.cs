@@ -26,15 +26,14 @@ namespace invisable_character
             Path.Combine(Application.StartupPath, "resources/character/7.png")
         };
 
-
-        string user_name = "nigga";
+        string user_name = "shpat";
         int click_count = 0; 
         int tick_count = 0; 
         private Tamagotchi tamagotchi;
         public Form1()
         {
             InitializeComponent();
-            tamagotchi = new Tamagotchi(tamagotchiPaths,"BOB", 0, 0, pictureBox1, label1, panel1, panel2, timer1);
+            tamagotchi = new Tamagotchi(tamagotchiPaths,"BOB", 100000, 100000, pictureBox1, label1, panel1, panel2, timer1);
             InitializeFrom();
         }
         public void InitializeFrom()
@@ -48,6 +47,13 @@ namespace invisable_character
             //timer
             timer1.Interval = 1000;
             timer1.Start();
+
+            // progress bar
+            progressBar1.Maximum = 100000;
+            progressBar2.Maximum = 100000;
+
+            progressBar1.ForeColor = Color.Blue;
+            progressBar1.BackColor = Color.Gray;
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -101,15 +107,18 @@ namespace invisable_character
         private async void timer1_Tick(object sender, EventArgs e)
         {
             tick_count++;
-            tamagotchi.HungerLevel++;
-            tamagotchi.SleepLevel++;
+            tamagotchi.HungerLevel -= 100;
+            tamagotchi.SleepLevel -= 100;
+
+            progressBar1.Value = tamagotchi.HungerLevel;
+            progressBar2.Value = tamagotchi.SleepLevel;
 
             if (tick_count > 10)
             {
                 label1.Text = "";
                 panel2.Visible = false;
             }
-            if (tamagotchi.HungerLevel > 50000)
+            if (tamagotchi.HungerLevel < 50000)
             {
                 pictureBox1.Load(tamagotchiPaths[1]);
                 label1.Text = "im kinda hungry...";

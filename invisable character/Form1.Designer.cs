@@ -42,6 +42,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -135,7 +137,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(3, 0);
+            this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(187, 35);
             this.button1.TabIndex = 0;
@@ -174,8 +176,24 @@
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(3, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(588, 51);
+            this.panel2.Size = new System.Drawing.Size(407, 51);
             this.panel2.TabIndex = 4;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(35, 352);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(324, 30);
+            this.progressBar1.TabIndex = 5;
+            // 
+            // progressBar2
+            // 
+            this.progressBar2.BackColor = System.Drawing.Color.Black;
+            this.progressBar2.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.progressBar2.Location = new System.Drawing.Point(35, 69);
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(324, 30);
+            this.progressBar2.TabIndex = 6;
             // 
             // Form1
             // 
@@ -183,6 +201,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(596, 404);
+            this.Controls.Add(this.progressBar2);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
@@ -213,6 +233,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar progressBar2;
     }
 }
 

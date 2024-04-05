@@ -30,7 +30,6 @@ namespace invisable_character
             this.panel2 = panel2;
             this.timer = timer;
             InitializeForm();
-
         }
 
         public void InitializeForm()
@@ -45,17 +44,17 @@ namespace invisable_character
 
         public async Task CheckHunger()
         {
-            if (HungerLevel > 100000)
+            if (HungerLevel < 900000)
             {
                 panel1.Visible = false;
-                HungerLevel = 0;
                 label.Text = "yummy food :)";
                 pictureBox.Load(TamagotchiImages[3]);
                 panel2.Visible = true;
                 timer.Enabled = false;
                 await Task.Delay(10000);
                 timer.Enabled = true;
-                pictureBox.Load("resources/character/normal.png");
+                HungerLevel = 100000;
+                pictureBox.Load(TamagotchiImages[0]);
             }
             else
             {
@@ -65,24 +64,40 @@ namespace invisable_character
                 timer.Enabled = false;
                 await Task.Delay(5000);
                 timer.Enabled = true;
-                pictureBox.Load("resources/character/normal.png");
+                pictureBox.Load(TamagotchiImages[0]);
             }
         }
 
         public async Task CheckSleep()
         {
+            int amount_of_sleep = 0;
             panel1.Visible = false;
             label.Text = "night night";
             pictureBox.Load(TamagotchiImages[6]);
             panel2.Visible = true;
             timer.Enabled = false;
-            await Task.Delay(1000);
 
+            await Task.Delay(1000);
             label.Text = "ZzzZZZ";
+
+            while (timer.Enabled == false)
+            {
+                amount_of_sleep++;
+                if (SleepLevel + amount_of_sleep > 100000)
+                {
+                    timer.Enabled = true;
+                    SleepLevel = 100000;
+                    amount_of_sleep = 0;
+                }
+            }
+
             await Task.Delay(100000);
+
             timer.Enabled = true;
+            SleepLevel += amount_of_sleep;
             pictureBox.Load(TamagotchiImages[0]);
         }
+
 
         public async Task PetTamagotchi()
         {
