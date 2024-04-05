@@ -82,6 +82,8 @@ namespace invisable_character
         private void button5_Click(object sender, EventArgs e)
         {
             click_count++;
+            OnlineGameForm mainform = new OnlineGameForm();
+            mainform.Show();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -94,7 +96,6 @@ namespace invisable_character
             click_count++;
             timer1.Stop();
             panel1.Visible = false;
-            this.Close();
         }
 
         private void pictureBox1_Click_1(object sender, EventArgs e)

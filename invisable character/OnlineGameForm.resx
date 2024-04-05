@@ -117,14 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="projekt3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\projekt3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>This project is an implementation of a classic rock-paper-scissors game that allows two players to play against each other online. Players can connect to the game server, choose their moves (rock, paper, or scissors), and see the outcome of each round in real-time.</value>
   </data>
-  <data name="anime_girl-removebg-preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\anime_girl-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="richTextBox2.Text" xml:space="preserve">
+    <value>Chatify is an online chatting application designed for Windows users, providing a seamless and intuitive platform for real-time communication. With Chatify, users can connect with friends, colleagues, or family members effortlessly, no matter where they are.</value>
   </data>
-  <data name="chatroom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chatroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="richTextBox3.Text" xml:space="preserve">
+    <value>This project is an implementation of a classic rock-paper-scissors game that allows two players to play against each other online. Players can connect to the game server, choose their moves (rock, paper, or scissors), and see the outcome of each round in real-time.</value>
   </data>
 </root>
