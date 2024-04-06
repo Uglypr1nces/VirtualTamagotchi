@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
 
@@ -12,28 +7,63 @@ namespace invisable_character
 {
     internal class Musicplayer
     {
-        public Musicplayer() 
-        {
+        private WaveOutEvent _outputDevice;
+        private AudioFileReader _audioFileReader;
 
+        public bool IsPlaying { get; private set; }
+
+        public Musicplayer()
+        {
+            IsPlaying = false;
         }
+
         public void Playmusic(string path)
         {
             try
             {
-                using (var audioFile = new AudioFileReader(path))
-                using (var outputDevice = new WaveOutEvent())
+                _audioFileReader = new AudioFileReader(path);
+                _outputDevice = new WaveOutEvent();
+
+                _outputDevice.Init(_audioFileReader);
+                _outputDevice.Play();
+
+                IsPlaying = true;
+
+                while (_outputDevice.PlaybackState == PlaybackState.Playing)
                 {
-                    outputDevice.Init(audioFile);
-                    outputDevice.Play();
-                    while (outputDevice.PlaybackState == PlaybackState.Playing)
-                    {
-                        Thread.Sleep(100);
-                    }
+                    Thread.Sleep(100);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error playing sound: " + ex.Message);
+            }
+        }
+
+        public void Pause()
+        {
+            if (_outputDevice != null && IsPlaying)
+            {
+                _outputDevice.Pause();
+                IsPlaying = false;
+            }
+        }
+
+        public void Resume()
+        {
+            if (_outputDevice != null && !IsPlaying)
+            {
+                _outputDevice.Play();
+                IsPlaying = true;
+            }
+        }
+
+        public void Stop()
+        {
+            if (_outputDevice != null)
+            {
+                _outputDevice.Stop();
+                IsPlaying = false;
             }
         }
     }

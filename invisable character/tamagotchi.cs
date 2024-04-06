@@ -12,13 +12,16 @@ namespace invisable_character
         private Panel panel1;
         private Panel panel2;
         private Timer timer;
+        private String[] Playlist = new String[0];
 
         private Musicplayer musicplayer = new Musicplayer();
         public string TamagotchiName { get; set; }
         public int HungerLevel { get; set; }
         public int SleepLevel { get; set; }
+       
         public string[] TamagotchiImages { get; set; }
 
+        private int _currentIndex = -1;
         public Tamagotchi(string[] images,string name, int hunger, int sleep, PictureBox pictureBox, Label label, Panel panel1, Panel panel2, Timer timer)
         {
             TamagotchiName = name;
@@ -112,9 +115,45 @@ namespace invisable_character
         }
         public void MusicPlayer(string[] Playlist)
         {
-            foreach(string Music in Playlist)
+            this.Playlist = Playlist;
+            _currentIndex = 0;
+            musicplayer.Playmusic(Playlist[_currentIndex]);
+        }
+        public void PauseorPlay()
+        {
+            if (musicplayer.IsPlaying)
             {
-                musicplayer.Playmusic(Music);
+                musicplayer.Pause();
+            }
+            else
+            {
+                if (_currentIndex >= 0 && _currentIndex < Playlist.Length)
+                {
+                    if (_currentIndex == -1)
+                    {
+                        _currentIndex = 0;
+                    }
+                    musicplayer.Playmusic(Playlist[_currentIndex]);
+                }
+            }
+        }
+        public void PlayNext()
+        {
+            if (_currentIndex < Playlist.Length - 1)
+            {
+                _currentIndex++;
+                musicplayer.Stop();
+                musicplayer.Playmusic(Playlist[_currentIndex]);
+            }
+        }
+
+        public void PlayPrevious()
+        {
+            if (_currentIndex > 0)
+            {
+                _currentIndex--;
+                musicplayer.Stop();
+                musicplayer.Playmusic(Playlist[_currentIndex]);
             }
         }
         public async void OpenGame(string game)

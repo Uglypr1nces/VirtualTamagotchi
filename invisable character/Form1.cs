@@ -149,7 +149,7 @@ namespace InvisibleCharacter
             }
             else
             {
-
+                _tamagotchi.PlayPrevious();
             }
         }
 
@@ -167,7 +167,7 @@ namespace InvisibleCharacter
             }
             else
             {
-
+                _tamagotchi.PauseorPlay();
             }
         }
 
@@ -185,7 +185,7 @@ namespace InvisibleCharacter
             }
             else
             {
-
+                _tamagotchi.PlayNext();
             }
         }
 
