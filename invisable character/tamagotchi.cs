@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using NAudio.Wave;
 namespace invisable_character
 {
     public class Tamagotchi
@@ -13,6 +13,7 @@ namespace invisable_character
         private Panel panel2;
         private Timer timer;
 
+        private Musicplayer musicplayer = new Musicplayer();
         public string TamagotchiName { get; set; }
         public int HungerLevel { get; set; }
         public int SleepLevel { get; set; }
@@ -98,7 +99,6 @@ namespace invisable_character
             pictureBox.Load(TamagotchiImages[0]);
         }
 
-
         public async Task PetTamagotchi()
         {
             panel1.Visible = false;
@@ -109,6 +109,17 @@ namespace invisable_character
             await Task.Delay(3000);
             timer.Enabled = true;
             pictureBox.Load(TamagotchiImages[1]);
+        }
+        public void MusicPlayer(string[] Playlist)
+        {
+            foreach(string Music in Playlist)
+            {
+                musicplayer.Playmusic(Music);
+            }
+        }
+        public async void OpenGame(string game)
+        {
+
         }
     }
 }

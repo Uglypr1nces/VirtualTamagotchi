@@ -1,4 +1,4 @@
-﻿namespace invisable_character
+﻿namespace InvisibleCharacter
 {
     partial class Form1
     {
@@ -44,9 +44,15 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -60,7 +66,7 @@
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(404, 79);
+            this.panel1.Location = new System.Drawing.Point(404, 69);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(190, 326);
             this.panel1.TabIndex = 1;
@@ -73,6 +79,7 @@
             this.button8.TabIndex = 7;
             this.button8.Text = "Play music";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button7
             // 
@@ -195,12 +202,56 @@
             this.progressBar2.Size = new System.Drawing.Size(324, 30);
             this.progressBar2.TabIndex = 6;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.button11);
+            this.panel3.Controls.Add(this.button10);
+            this.panel3.Controls.Add(this.button9);
+            this.panel3.Location = new System.Drawing.Point(35, 388);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(324, 60);
+            this.panel3.TabIndex = 7;
+            // 
+            // button11
+            // 
+            this.button11.BackColor = System.Drawing.Color.LightGray;
+            this.button11.Location = new System.Drawing.Point(218, 6);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(103, 49);
+            this.button11.TabIndex = 2;
+            this.button11.Text = "button11";
+            this.button11.UseVisualStyleBackColor = false;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.LightGray;
+            this.button10.Location = new System.Drawing.Point(111, 6);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(103, 49);
+            this.button10.TabIndex = 1;
+            this.button10.Text = "button10";
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.LightGray;
+            this.button9.Location = new System.Drawing.Point(3, 3);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(103, 49);
+            this.button9.TabIndex = 0;
+            this.button9.Text = "button9";
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(596, 404);
+            this.ClientSize = new System.Drawing.Size(596, 452);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.progressBar2);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.panel2);
@@ -215,6 +266,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -235,6 +287,11 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 
