@@ -1,11 +1,14 @@
 ﻿using invisable_character;
 using System;
-using System.IO;
 using System.Linq;
+using System.Data;
+using System.Text;
+using System.IO;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace InvisibleCharacter
 {
@@ -22,22 +25,26 @@ namespace InvisibleCharacter
             Path.Combine(Application.StartupPath, "resources/character/6.png"),
             Path.Combine(Application.StartupPath, "resources/character/7.png")
         };
+        public string _userName { get; set; }
+        public string petname { get; set; }
 
         private readonly string[] _musicFilePaths = { };
         private readonly string[] _offlineGames = { "RPS", "Guessthenumber", "ping pong" };
         private readonly string[] _onlineGames = { "RPS", "Chatify", "TicTacToe" };
 
         private string _musicFolderPath = "";
-        private string _userName = "shpat";
         private int _clickCount = 0;
         private int _tickCount = 0;
         private Tamagotchi _tamagotchi;
         private string _typeOfGame = "";
+        private string _userDatabasePath = Path.Combine(Application.StartupPath, "resources/database/users.csv");
 
-        public Form1()
+        public Form1(string userName, string petName)
         {
             InitializeComponent();
-            _tamagotchi = new Tamagotchi(_tamagotchiPaths, "BOB", 100000, 100000, pictureBox1, label1, panel1, panel2, timer1);
+            _userName = userName; 
+            petname = petName;
+            _tamagotchi = new Tamagotchi(_tamagotchiPaths, petname, 100000, 100000, pictureBox1, label1, panel1, panel2, timer1);
             InitializeForm();
         }
 
@@ -126,13 +133,18 @@ namespace InvisibleCharacter
 
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK) { _musicFolderPath = folderBrowserDialog.SelectedPath; }
             }
-            foreach(string path in Directory.GetFiles(_musicFolderPath))
+            try
             {
-                if(path.Contains(".mp3") || path.Contains(".wav")){
-                    _musicFilePaths.Append(path);
+                foreach (string path in Directory.GetFiles(_musicFolderPath))
+                {
+                    if (path.Contains(".mp3") || path.Contains(".wav"))
+                    {
+                        _musicFilePaths.Append(path);
+                    }
                 }
+                _tamagotchi.MusicPlayer(_musicFilePaths);
             }
-            _tamagotchi.MusicPlayer(_musicFilePaths);
+            catch(Exception ex){ panel3.Visible = false; }
         }
 
         private void button9_Click(object sender, EventArgs e)
