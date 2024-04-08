@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using NAudio.Wave;
@@ -7,31 +8,26 @@ namespace invisable_character
 {
     internal class Musicplayer
     {
-        private WaveOutEvent _outputDevice;
-        private AudioFileReader _audioFileReader;
-
-        public bool IsPlaying { get; private set; }
-
+        private WaveOutEvent outputDevice;
+        public bool isplaying;
         public Musicplayer()
         {
-            IsPlaying = false;
+            outputDevice = new WaveOutEvent();
         }
 
         public void Playmusic(string path)
         {
             try
             {
-                _audioFileReader = new AudioFileReader(path);
-                _outputDevice = new WaveOutEvent();
-
-                _outputDevice.Init(_audioFileReader);
-                _outputDevice.Play();
-
-                IsPlaying = true;
-
-                while (_outputDevice.PlaybackState == PlaybackState.Playing)
+                using (var audioFile = new AudioFileReader(path))
                 {
-                    Thread.Sleep(100);
+                    outputDevice.Init(audioFile);
+                    outputDevice.Play();
+                    isplaying = true;
+                    while (outputDevice.PlaybackState == PlaybackState.Playing)
+                    {
+                        Thread.Sleep(100);
+                    }
                 }
             }
             catch (Exception ex)
@@ -39,31 +35,14 @@ namespace invisable_character
                 MessageBox.Show("Error playing sound: " + ex.Message);
             }
         }
-
-        public void Pause()
+        public void Stopmusic()
         {
-            if (_outputDevice != null && IsPlaying)
+            if (outputDevice != null)
             {
-                _outputDevice.Pause();
-                IsPlaying = false;
-            }
-        }
-
-        public void Resume()
-        {
-            if (_outputDevice != null && !IsPlaying)
-            {
-                _outputDevice.Play();
-                IsPlaying = true;
-            }
-        }
-
-        public void Stop()
-        {
-            if (_outputDevice != null)
-            {
-                _outputDevice.Stop();
-                IsPlaying = false;
+                outputDevice.Stop();
+                outputDevice.Dispose();
+                outputDevice = new WaveOutEvent(); // Reinitialize for future use
+                isplaying = false;
             }
         }
     }

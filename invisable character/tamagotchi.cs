@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 namespace invisable_character
 {
     public class Tamagotchi
@@ -45,10 +48,25 @@ namespace invisable_character
             timer.Interval = 1000;
             timer.Start();
         }
+        public List<T> MixList<T>(List<T> inputList)
+        {
+            Random rng = new Random();
+            List<T> resultList = new List<T>(inputList);
+            int n = resultList.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = resultList[k];
+                resultList[k] = resultList[n];
+                resultList[n] = value;
+            }
+            return resultList;
+        }
 
         public async Task CheckHunger()
         {
-            if (HungerLevel < 900000)
+            if (HungerLevel < 800000)
             {
                 panel1.Visible = false;
                 label.Text = "yummy food :)";
@@ -57,7 +75,7 @@ namespace invisable_character
                 timer.Enabled = false;
                 await Task.Delay(10000);
                 timer.Enabled = true;
-                HungerLevel = 100000;
+                HungerLevel += 200000;
                 pictureBox.Load(TamagotchiImages[0]);
             }
             else
@@ -113,52 +131,54 @@ namespace invisable_character
             timer.Enabled = true;
             pictureBox.Load(TamagotchiImages[1]);
         }
-        public void MusicPlayer(string[] Playlist)
+        public void StartMusic(string path)
         {
-            this.Playlist = Playlist;
-            _currentIndex = 0;
-            musicplayer.Playmusic(Playlist[_currentIndex]);
+            musicplayer.Playmusic(path);
         }
-        public void PauseorPlay()
+        public void StopMusic()
         {
-            if (musicplayer.IsPlaying)
+            musicplayer.Stopmusic();
+        }
+        public bool isplaying()
+        {
+            if(musicplayer.isplaying)
             {
-                musicplayer.Pause();
+                return true;
             }
-            else
+            return false;
+        }
+
+        public async void OpenOfflineGame(string game)
+        {
+            if (game == "ping pong")
             {
-                if (_currentIndex >= 0 && _currentIndex < Playlist.Length)
+                try
                 {
-                    if (_currentIndex == -1)
+                    pingpong pingpong = Application.OpenForms["pingpong"] as pingpong;
+                    if (pingpong == null) { pingpong = new pingpong(); }
+
+                    try
                     {
-                        _currentIndex = 0;
+                        pingpong.Show();
                     }
-                    musicplayer.Playmusic(Playlist[_currentIndex]);
+                    catch (SocketException ex)
+                    {
+                        MessageBox.Show($"error opening: {ex.Message}");
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("something went wrong with opening the form");
                 }
             }
         }
-        public void PlayNext()
-        {
-            if (_currentIndex < Playlist.Length - 1)
-            {
-                _currentIndex++;
-                musicplayer.Stop();
-                musicplayer.Playmusic(Playlist[_currentIndex]);
-            }
-        }
-
-        public void PlayPrevious()
-        {
-            if (_currentIndex > 0)
-            {
-                _currentIndex--;
-                musicplayer.Stop();
-                musicplayer.Playmusic(Playlist[_currentIndex]);
-            }
-        }
-        public async void OpenGame(string game)
+        public async void OpenOnlineGame(string game)
         {
 
+        }
+        private void openform(string name, string pet)
+        {
+            
         }
     }
 }

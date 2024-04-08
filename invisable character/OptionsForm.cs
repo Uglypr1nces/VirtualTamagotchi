@@ -41,8 +41,6 @@ namespace invisable_character
                 {
                     petname = textBox1.Text;
                     currentstep++;
-
-                    MessageBox.Show($"username = {username}, petname = {petname}");
                     openform(username,petname);
                 }
             }
@@ -77,7 +75,7 @@ namespace invisable_character
                     try
                     {
                         form1._userName = name;
-                        form1.petname = pet;
+                        form1._petname = pet;
                         form1.Show();
                         this.Hide();
                     }
