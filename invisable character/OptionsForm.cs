@@ -19,11 +19,23 @@ namespace invisable_character
         public int currentstep = 0;
         public string username = "";
         public string petname = "";
+
+        private database mydatabase = new database(Path.Combine(Application.StartupPath, "resources/database/user.csv"));
         public OptionsForm()
         {
             InitializeComponent();
+            if (mydatabase.UserExists())
+            {
+                openform(mydatabase.recieveUsername(), mydatabase.recievePetname());   
+            }
         }
-        private void button1_Click(object sender, EventArgs e)
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            base.OnFormClosed(e);
+            this.Dispose();
+        }
+
+    private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == "" && textBox1.Text == " ")
             {
@@ -40,6 +52,7 @@ namespace invisable_character
                 else
                 {
                     petname = textBox1.Text;
+                    mydatabase.adduser(username, petname);
                     currentstep++;
                     openform(username,petname);
                 }
@@ -68,27 +81,39 @@ namespace invisable_character
         {
             try
             {
-                Form1 form1 = Application.OpenForms["Form1"] as Form1;
-                if (form1 == null) { form1 = new Form1(username,petname); }
-                if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(petname))
+                Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+                if (form1 == null)
+                {
+                    form1 = new Form1(name, pet);
+                }
+                if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(pet))
                 {
                     try
                     {
-                        form1._userName = name;
-                        form1._petname = pet;
-                        form1.Show();
+                        if (!form1.Visible)
+                        {
+                            form1._userName = name;
+                            form1._petname = pet;
+                            form1.Show();
+                        }
+                        else
+                        {
+                            form1.Show();
+                        }
+
                         this.Hide();
                     }
                     catch (SocketException ex)
                     {
-                        MessageBox.Show($"error opening: {ex.Message}");
+                        MessageBox.Show($"Error opening: {ex.Message}");
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("something went wrong with opening the form");
+                MessageBox.Show($"Error: {ex}");
             }
         }
+
     }
 }

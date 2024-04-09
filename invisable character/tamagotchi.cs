@@ -21,11 +21,11 @@ namespace invisable_character
         public string TamagotchiName { get; set; }
         public int HungerLevel { get; set; }
         public int SleepLevel { get; set; }
-       
+
         public string[] TamagotchiImages { get; set; }
 
         private int _currentIndex = -1;
-        public Tamagotchi(string[] images,string name, int hunger, int sleep, PictureBox pictureBox, Label label, Panel panel1, Panel panel2, Timer timer)
+        public Tamagotchi(string[] images, string name, int hunger, int sleep, PictureBox pictureBox, Label label, Panel panel1, Panel panel2, Timer timer)
         {
             TamagotchiName = name;
             HungerLevel = hunger;
@@ -75,7 +75,7 @@ namespace invisable_character
                 timer.Enabled = false;
                 await Task.Delay(10000);
                 timer.Enabled = true;
-                HungerLevel += 200000;
+                HungerLevel += 20000;
                 pictureBox.Load(TamagotchiImages[0]);
             }
             else
@@ -141,7 +141,7 @@ namespace invisable_character
         }
         public bool isplaying()
         {
-            if(musicplayer.isplaying)
+            if (musicplayer.isplaying)
             {
                 return true;
             }
@@ -178,7 +178,7 @@ namespace invisable_character
         }
         private void openform(string name, string pet)
         {
-            
+
         }
     }
 }

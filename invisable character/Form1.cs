@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Reflection.Emit;
 
 namespace InvisibleCharacter
 {
@@ -33,14 +35,13 @@ namespace InvisibleCharacter
 
         private string _typeOfGame = "";
         private string _musicFolderPath = "";
+        private string _selectedBackground = Path.Combine(Application.StartupPath, "resources/background/6.png");
         private int _clickCount = 0;
         private int _tickCount = 0;
         private int _musicIndex = 0;
         private int _openOrCloseMusic = 0;
 
         private Tamagotchi _tamagotchi;
-
-        private string _userDatabasePath = Path.Combine(Application.StartupPath, "resources/database/users.csv");
 
         public Form1(string userName, string petName)
         {
@@ -58,7 +59,8 @@ namespace InvisibleCharacter
             panel3.Visible = false;
             pictureBox1.Load(_tamagotchiPaths[0]);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            label1.Text = $"Hello {_userName} My Name is {_tamagotchi.TamagotchiName}";
+            label1.Text = $"Hello {_userName}, my name is {_tamagotchi.TamagotchiName}";
+            label2.Text = _petname;
 
             // Timer
             timer1.Interval = 1000;
@@ -67,6 +69,28 @@ namespace InvisibleCharacter
             // Progress Bar
             progressBar1.Maximum = 100000;
             progressBar2.Maximum = 100000;
+
+            //background
+            /*
+            Image backgroundImage = Image.FromFile(_selectedBackground);
+            panel2.BackgroundImage = backgroundImage;
+            label2.Image = backgroundImage;
+
+            foreach (Control control in Controls) //change the background of button 1-11,k
+            {
+                if (control is Button button)
+                {
+                    int buttonNumber;
+                    if (int.TryParse(button.Name.Substring(6), out buttonNumber)) 
+                    {
+                        if (buttonNumber >= 1 && buttonNumber <= 11) 
+                        {
+                            button.BackgroundImage = backgroundImage;
+                        }
+                    }
+                }
+            }
+            */
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -105,14 +129,15 @@ namespace InvisibleCharacter
         {
             _clickCount++;
         }
-
-        private void button7_Click(object sender, EventArgs e)
+        private async void button7_Click(object sender, EventArgs e)
         {
-            _clickCount++;
-            timer1.Stop();
-            panel1.Visible = false;
+            label1.Text = "Bye byee :(";
+            pictureBox1.Load(_tamagotchiPaths[1]);
+            panel2.Visible = true;
+            timer1.Enabled = false;
+            await Task.Delay(10000);
+            this.Close();
         }
-
         private void button8_Click(object sender, EventArgs e)
         {
             if (_openOrCloseMusic == 0)
@@ -323,7 +348,7 @@ namespace InvisibleCharacter
                 timer1.Enabled = true;
             }
 
-            if (_tamagotchi.SleepLevel < 50000)
+            if (_tamagotchi.SleepLevel < 20000)
             {
                 pictureBox1.Load(_tamagotchiPaths[1]);
                 label1.Text = "I'm kinda sleepy...";
@@ -333,5 +358,6 @@ namespace InvisibleCharacter
                 timer1.Enabled = true;
             }
         }
+
     }
 }
