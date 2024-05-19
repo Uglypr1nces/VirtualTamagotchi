@@ -30,8 +30,3 @@ Welcome to Tamagotchi! This is a simple virtual pet simulation game developed us
 
 Contributions are welcome! If you have any ideas for new features, improvements, or bug fixes, feel free to open an issue or submit a pull request.
 
-## Acknowledgments
-
-- Inspiration: This project was inspired by the classic Tamagotchi virtual pet toys.
-- Libraries: Special thanks to [Library Name] for providing [feature/functionality].
-- Contributors: Thanks to all contributors who helped improve this project.
