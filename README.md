@@ -30,10 +30,6 @@ Welcome to Tamagotchi! This is a simple virtual pet simulation game developed us
 
 Contributions are welcome! If you have any ideas for new features, improvements, or bug fixes, feel free to open an issue or submit a pull request.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
 - Inspiration: This project was inspired by the classic Tamagotchi virtual pet toys.
